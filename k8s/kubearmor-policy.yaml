@@ -1,0 +1,80 @@
+# ============================================================
+# KubeArmor Zero-Trust Policy for Wisecow Application
+# Problem Statement 3
+#
+# Apply with:
+#   kubectl apply -f kubearmor-policy.yaml
+#
+# Install KubeArmor first:
+#   helm repo add kubearmor https://kubearmor.io/charts
+#   helm install kubearmor kubearmor/kubearmor -n kube-system
+# ============================================================
+
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: wisecow-zero-trust-policy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: wisecow    # Applies to wisecow pods only
+
+  # ─────────────────────────────────────────────
+  # PROCESS RULES
+  # Only allow specific binaries to execute
+  # ─────────────────────────────────────────────
+  process:
+    matchPaths:
+      # Allow only bash and wisecow script
+      - path: /bin/bash
+      - path: /usr/bin/fortune
+      - path: /usr/games/cowsay
+      - path: /bin/nc              # netcat for serving HTTP
+      - path: /usr/bin/nc
+    action: Allow
+
+  # ─────────────────────────────────────────────
+  # FILE RULES
+  # Restrict read/write to necessary paths only
+  # ─────────────────────────────────────────────
+  file:
+    matchPaths:
+      # Allow reading app files
+      - path: /app/wisecow.sh
+        readOnly: true
+      # Allow reading fortune data files
+      - path: /usr/share/games/fortunes/
+        readOnly: true
+      # Allow reading cowsay cow files
+      - path: /usr/share/cowsay/
+        readOnly: true
+      # Block writing to sensitive paths
+      - path: /etc/
+        readOnly: true
+      - path: /bin/
+        readOnly: true
+    action: Allow
+
+  # ─────────────────────────────────────────────
+  # NETWORK RULES
+  # Only allow necessary network operations
+  # ─────────────────────────────────────────────
+  network:
+    matchProtocols:
+      # Allow TCP (for serving HTTP on port 4499)
+      - protocol: tcp
+      # Block all other protocols
+    action: Allow
+
+  # ─────────────────────────────────────────────
+  # CAPABILITIES
+  # Drop all Linux capabilities not needed
+  # ─────────────────────────────────────────────
+  capabilities:
+    matchCapabilities:
+      - capability: net_bind_service    # Allow binding to ports
+    action: Allow
+
+  # Default action: block everything not explicitly allowed
+  action: Block

@@ -1,0 +1,51 @@
+# ============================================================
+# deployment.yaml
+# Deploys the Wisecow app as a Kubernetes Deployment
+# ============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wisecow-deployment
+  labels:
+    app: wisecow
+spec:
+  replicas: 2                         # 2 pods for availability
+  selector:
+    matchLabels:
+      app: wisecow
+  template:
+    metadata:
+      labels:
+        app: wisecow
+    spec:
+      containers:
+        - name: wisecow
+          # IMPORTANT: Replace YOUR_DOCKERHUB_USERNAME with your actual username
+          image: yogismash/wisecow:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4499     # Port wisecow listens on
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+
+---
+# ============================================================
+# Service - Exposes wisecow app inside cluster
+# ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: wisecow-service
+spec:
+  selector:
+    app: wisecow
+  ports:
+    - protocol: TCP
+      port: 80           # External port
+      targetPort: 4499   # Container port
+  type: ClusterIP        # Changed to ClusterIP since Ingress handles external access

@@ -1,0 +1,41 @@
+# ============================================================
+# ingress.yaml
+# Handles TLS termination and routes traffic to wisecow service
+# ============================================================
+
+# TLS Certificate Secret
+# Run this command to generate self-signed cert (for local/dev):
+#   openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+#     -keyout tls.key -out tls.crt \
+#     -subj "/CN=wisecow.local/O=wisecow"
+#
+# Then create the secret:
+#   kubectl create secret tls wisecow-tls-secret \
+#     --cert=tls.crt --key=tls.key
+
+---
+# Ingress resource - routes HTTPS traffic to wisecow-service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wisecow-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - wisecow.local               # Your domain (or use localhost)
+      secretName: wisecow-tls-secret  # Secret created by the openssl command above
+  rules:
+    - host: wisecow.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port:
+                  number: 80
