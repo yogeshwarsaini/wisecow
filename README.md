@@ -29,3 +29,4 @@ Deploy the wisecow application as a k8s app
 # Updated
 # Updated
 # Test
+# Fix TLS
