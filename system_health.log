@@ -1,0 +1,23 @@
+2026-03-12 10:58:33,350 [INFO] ============================================================
+2026-03-12 10:58:33,350 [INFO] 🏥 SYSTEM HEALTH CHECK — 2026-03-12 10:58:33
+2026-03-12 10:58:33,350 [INFO] ============================================================
+2026-03-12 10:58:34,351 [INFO] ✅ CPU Usage: 5.4%
+2026-03-12 10:58:34,351 [WARNING] 🔴 MEMORY ALERT: 80.8% used (0.76GB / 0.93GB) (threshold: 80%)
+2026-03-12 10:58:34,352 [INFO] ✅ Disk [/]: 68.6% used
+2026-03-12 10:58:34,352 [WARNING] 🔴 DISK ALERT: /snap/amazon-ssm-agent/11797 is 100.0% full (threshold: 90%)
+2026-03-12 10:58:34,352 [WARNING] 🔴 DISK ALERT: /snap/core20/2682 is 100.0% full (threshold: 90%)
+2026-03-12 10:58:34,352 [WARNING] 🔴 DISK ALERT: /snap/core22/2163 is 100.0% full (threshold: 90%)
+2026-03-12 10:58:34,352 [WARNING] 🔴 DISK ALERT: /snap/snapd/25577 is 100.0% full (threshold: 90%)
+2026-03-12 10:58:34,352 [WARNING] 🔴 DISK ALERT: /snap/lxd/36918 is 100.0% full (threshold: 90%)
+2026-03-12 10:58:34,352 [INFO] ✅ Disk [/boot/efi]: 5.8% used
+2026-03-12 10:58:34,353 [INFO] ✅ Running Processes: 142
+2026-03-12 10:58:34,378 [INFO] 📊 Top 5 CPU processes:
+2026-03-12 10:58:34,378 [INFO]    PID 1: systemd — CPU: 0.0%, MEM: 0.8%
+2026-03-12 10:58:34,378 [INFO]    PID 2: kthreadd — CPU: 0.0%, MEM: 0.0%
+2026-03-12 10:58:34,378 [INFO]    PID 3: pool_workqueue_release — CPU: 0.0%, MEM: 0.0%
+2026-03-12 10:58:34,378 [INFO]    PID 4: kworker/R-rcu_g — CPU: 0.0%, MEM: 0.0%
+2026-03-12 10:58:34,378 [INFO]    PID 5: kworker/R-rcu_p — CPU: 0.0%, MEM: 0.0%
+2026-03-12 10:58:34,378 [INFO] ------------------------------------------------------------
+2026-03-12 10:58:34,378 [WARNING] ⚠️  ALERTS TRIGGERED: Memory, Disk
+2026-03-12 10:58:34,378 [INFO] 📝 Log saved to: system_health.log
+2026-03-12 10:58:34,379 [INFO] ============================================================
