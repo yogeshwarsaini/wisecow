@@ -81,13 +81,14 @@ jobs:
         run: |
           # Update the image tag to latest commit SHA
           kubectl set image deployment/wisecow-deployment \
-            wisecow=${{ secrets.DOCKERHUB_USERNAME }}/wisecow:${{ github.sha }}
+            wisecow=${{ secrets.DOCKERHUB_USERNAME }}/wisecow:${{ github.sha }} \
+      --request-timeout=60s
 
           # Apply all manifest files (in case new ones added)
           kubectl apply -f k8s/ --validate=false
 
           # Wait for rollout to complete
-          kubectl rollout status deployment/wisecow-deployment --timeout=120s
+          kubectl rollout status deployment/wisecow-deployment --timeout=300s
 
       # Step 5: Verify deployment
       - name: Verify Deployment
