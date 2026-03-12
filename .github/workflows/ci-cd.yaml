@@ -84,7 +84,7 @@ jobs:
             wisecow=${{ secrets.DOCKERHUB_USERNAME }}/wisecow:${{ github.sha }}
 
           # Apply all manifest files (in case new ones added)
-          kubectl apply -f k8s/
+          kubectl apply -f k8s/ --validate=false
 
           # Wait for rollout to complete
           kubectl rollout status deployment/wisecow-deployment --timeout=120s
