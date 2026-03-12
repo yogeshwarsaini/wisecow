@@ -30,3 +30,6 @@ Deploy the wisecow application as a k8s app
 # Updated
 # Test
 # Fix TLS
+
+GitHub Repo: https://github.com/yogeshwarsaini/wisecow
+Live App: http://3.110.165.207:30152

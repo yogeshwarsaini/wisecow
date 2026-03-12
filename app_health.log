@@ -1,0 +1,14 @@
+2026-03-12 10:59:28,264 [INFO] ======================================================================
+2026-03-12 10:59:28,266 [INFO] 🔍 APPLICATION HEALTH CHECK — 2026-03-12 10:59:28
+2026-03-12 10:59:28,266 [INFO] ======================================================================
+2026-03-12 10:59:28,279 [ERROR] 🔴 DOWN | Wisecow App               | CONNECTION REFUSED | http://localhost:4499
+2026-03-12 10:59:28,967 [INFO] ✅ UP   | Google                    | HTTP 200 | 687.38ms | https://www.google.com
+2026-03-12 10:59:29,766 [INFO] ✅ UP   | Example API               | HTTP 200 | 799.04ms | https://httpbin.org/status/200
+2026-03-12 10:59:30,673 [WARNING] 🔴 DOWN | Broken App (test)         | HTTP 503 | 906.36ms | https://httpbin.org/status/503
+2026-03-12 10:59:30,674 [INFO] ----------------------------------------------------------------------
+2026-03-12 10:59:30,674 [INFO] 📊 SUMMARY: 2 UP ✅  |  2 DOWN 🔴  |  Total: 4
+2026-03-12 10:59:30,675 [WARNING] ⚠️  DOWN Applications:
+2026-03-12 10:59:30,675 [WARNING]    ❌ Wisecow App — Connection refused
+2026-03-12 10:59:30,675 [WARNING]    ❌ Broken App (test) — HTTP 503
+2026-03-12 10:59:30,675 [INFO] 📝 Log saved to: app_health.log
+2026-03-12 10:59:30,675 [INFO] ======================================================================
